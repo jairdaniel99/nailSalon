@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+#hero-background-image {
+  background-image: url("assets/images/image.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.animate-left {
+  position: relative;
+  animation: animateleft 0.8s;
+}
+@keyframes animateleft {
+  from {
+    left: -300px;
+    opacity: 0;
+  }
+  to {
+    left: 0;
+    opacity: 1;
+  }
+}
