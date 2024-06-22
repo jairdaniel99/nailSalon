@@ -11,6 +11,7 @@ import { ServicesComponent } from './pages/services/services.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { FormComponent } from './components/form/form.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { HeaderComponent } from './components/header/header.component';
     ContactComponent,
     FooterComponent,
     HeaderComponent,
+    FormComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],

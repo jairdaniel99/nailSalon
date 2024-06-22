@@ -21,3 +21,22 @@
     opacity: 1;
   }
 }
+
+.logo-nail {
+  background-image: url("assets/images/nail\ studio\ logo.png");
+  background-size: 30 24;
+}
+
+body {
+  background-color: rgba(255, 235, 210, 0.949);
+}
+#navbar {
+  background-color: antiquewhite;
+}
+.contact-background {
+  background-image: url("assets/images/nail-care-accessory-tools-pink-background.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+}
