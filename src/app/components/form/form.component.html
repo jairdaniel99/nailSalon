@@ -1,4 +1,8 @@
-<div class="form form-text blurredbackground">
+<form
+  (ngSubmit)="sendEmail(ContactForm)"
+  #ContactForm="ngForm"
+  class="form form-text blurredbackground"
+>
   <h5>
     Thank you for your interest in my services. Kindly complete the form below
     and I'll try to answer within a day!
@@ -8,8 +12,10 @@
     <input
       type="text"
       class="form-control"
+      name="name"
       id="name"
       placeholder="Please fill up your name."
+      ngModel
     />
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label"
@@ -18,8 +24,10 @@
       <input
         type="email"
         class="form-control"
+        name="email"
         id="exampleFormControlInput1"
         placeholder="name@example.com"
+        ngModel
       />
     </div>
     <div class="mb-3">
@@ -28,18 +36,27 @@
       >
       <textarea
         class="form-control"
+        name="information"
         id="exampleFormControlTextarea1"
         rows="3"
+        ngModel
       ></textarea>
     </div>
     <label for="form-select" class="form-label"
       >What type of service are you looking for?</label
     >
-    <select class="form-select" aria-label="Default select example">
+    <select
+      class="form-select"
+      name="service_type"
+      aria-label="Default select example"
+      ngModel
+    >
       <option selected>Select</option>
       <option value="1">One</option>
       <option value="2">Two</option>
       <option value="3">Three</option>
     </select>
   </div>
-</div>
+  <button type="submit">Submit</button>
+  <div *ngIf="formStatus">{{ formStatus }}</div>
+</form>
