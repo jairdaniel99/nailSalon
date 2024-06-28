@@ -3,22 +3,24 @@ h3 {
 }
 
 .form {
-  width: 300px;
+  width: 400px;
   margin: auto;
   color: azure;
-  background-color: transparent;
+  background-color: rgba(128, 128, 128, 0.572);
   padding: 50px;
   outline-width: 1px;
   outline-color: azure;
   outline-style: solid;
   border-radius: 5pt;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 .blurredbackground {
   backdrop-filter: blur(50px);
 }
 
+button {
+  margin-left: 100px;
+}
 .form-control,
 .form-select {
   background-color: transparent;
