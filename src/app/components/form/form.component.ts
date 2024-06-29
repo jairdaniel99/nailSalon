@@ -12,18 +12,37 @@ export class FormComponent {
   services = [
     {
       id: 1,
-      name: 'service 1',
-      description: 'description 1',
+      name: 'gel nails (new set)',
+      description: '',
       addons: ['addon 1', 'addon 2'],
     },
     {
       id: 2,
-      name: 'service 2',
-      description: 'description 2',
+      name: 'nail gel refill',
+      description: '',
+      addons: [],
+    },
+    {
+      id: 3,
+      name: 'nail polish*',
+      description: '',
+      addons: ['addon 3', 'addon 4'],
+    },
+    {
+      id: 4,
+      name: 'nail set removal',
+      description: '',
+      addons: ['addon 3', 'addon 4'],
+    },
+    {
+      id: 5,
+      name: 'polish removal',
+      description: '',
       addons: ['addon 3', 'addon 4'],
     },
   ];
   selectedAddons: string[] = [];
+  checkedAddons: string[] = [];
 
   serviceChanged(event: any) {
     console.log(event.target.value);
@@ -31,6 +50,24 @@ export class FormComponent {
       (service) => service.id == event.target.value
     );
     this.selectedAddons = selectedService ? selectedService.addons : [];
+    console.log(this.selectedAddons);
+  }
+  addonChanged(event: any) {
+    if (
+      event.target.checked &&
+      !this.checkedAddons.includes(event.target.value)
+    ) {
+      this.checkedAddons.push(event.target.value);
+    } else if (
+      !event.target.checked &&
+      this.checkedAddons.includes(event.target.value)
+    ) {
+      const foundAddon = this.checkedAddons.findIndex(
+        (addon) => addon == event.target.value
+      );
+      this.checkedAddons.splice(foundAddon, 1);
+    }
+    console.log(this.checkedAddons);
   }
   sendEmail(contactForm: any) {
     console.log(contactForm.value);

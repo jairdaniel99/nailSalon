@@ -61,6 +61,7 @@
   <label *ngIf="selectedAddons.length" class="form-label">Add-ons</label>
   <div *ngFor="let addon of selectedAddons; let i = index" class="form-check">
     <input
+      (change)="addonChanged($event)"
       class="form-check-input"
       type="checkbox"
       name="addons"
