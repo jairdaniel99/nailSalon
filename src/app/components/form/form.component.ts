@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import emailjs from '@emailjs/browser';
 import { environment } from '../../../../environment';
+import { MyDataService } from '../../services/myData/my-data.service';
+import { Inquiry } from '../../models/inquiry';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -9,6 +12,18 @@ import { environment } from '../../../../environment';
 })
 export class FormComponent {
   formStatus: any;
+  inquiries: any;
+  constructor(
+    private _inquiryService: MyDataService,
+    private formBuilder: FormBuilder
+  ) {}
+
+  ngOnInit() {
+    this._inquiryService.getInquiries().subscribe(
+      (res) => (this.inquiries = res),
+      (err) => console.log(err)
+    );
+  }
   services = [
     {
       id: 1,
@@ -41,15 +56,19 @@ export class FormComponent {
       addons: [],
     },
   ];
-  selectedAddons: string[] = [];
+  selectedAddons: any[] = [];
   checkedAddons: string[] = [];
+  selectedService: any = '';
 
   serviceChanged(event: any) {
     console.log(event.target.value);
     const selectedService = this.services.find(
       (service) => service.id == event.target.value
     );
+    this.selectedService = selectedService?.name;
     this.selectedAddons = selectedService ? selectedService.addons : [];
+    console.log('selected service: ' + selectedService?.name);
+
     console.log('available add-ons: ' + this.selectedAddons);
   }
   addonChanged(event: any) {
@@ -76,9 +95,9 @@ export class FormComponent {
       name: contactForm.value.name,
       email: contactForm.value.email,
       phone: contactForm.value.phone,
-      information: contactForm.value.information,
-      service_type: contactForm.value.service_type,
+      service: this.selectedService,
       addons: this.checkedAddons,
+      information: contactForm.value.information,
     };
 
     emailjs
@@ -93,10 +112,18 @@ export class FormComponent {
       .then(
         (response) => {
           this.formStatus = 'Thank you!';
+          console.log(this.formStatus);
         },
         (err) => {
           console.log('FAILED...', err);
         }
       );
+    this._inquiryService.getInquiries();
+    this._inquiryService.postInquiries(templateParams).subscribe(
+      (response) => {
+        console.log('posted to database!');
+      },
+      (error) => console.log("can't post to database.")
+    );
   }
 }
