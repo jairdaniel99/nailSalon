@@ -14,7 +14,7 @@ export class FormComponent {
       id: 1,
       name: 'gel nails (new set)',
       description: '',
-      addons: ['addon 1', 'addon 2'],
+      addons: [],
     },
     {
       id: 2,
@@ -26,19 +26,19 @@ export class FormComponent {
       id: 3,
       name: 'nail polish*',
       description: '',
-      addons: ['addon 3', 'addon 4'],
+      addons: ['hardening (dipping)', 'hardening (rubber)'],
     },
     {
       id: 4,
       name: 'nail set removal',
       description: '',
-      addons: ['addon 3', 'addon 4'],
+      addons: [],
     },
     {
       id: 5,
       name: 'polish removal',
       description: '',
-      addons: ['addon 3', 'addon 4'],
+      addons: [],
     },
   ];
   selectedAddons: string[] = [];
@@ -50,7 +50,7 @@ export class FormComponent {
       (service) => service.id == event.target.value
     );
     this.selectedAddons = selectedService ? selectedService.addons : [];
-    console.log(this.selectedAddons);
+    console.log('available add-ons: ' + this.selectedAddons);
   }
   addonChanged(event: any) {
     if (
@@ -75,9 +75,10 @@ export class FormComponent {
     const templateParams = {
       name: contactForm.value.name,
       email: contactForm.value.email,
+      phone: contactForm.value.phone,
       information: contactForm.value.information,
       service_type: contactForm.value.service_type,
-      addon_type: contactForm.value.addon_type,
+      addons: this.checkedAddons,
     };
 
     emailjs
