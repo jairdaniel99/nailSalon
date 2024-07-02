@@ -52,15 +52,14 @@
       ngModel
       (change)="serviceChanged($event)"
     >
-      <option selected>Select</option>
+      <option selected value="">Select</option>
       <option *ngFor="let service of services" [value]="service.id">
         {{ service.name }}
       </option>
     </select>
   </div>
   <label *ngIf="selectedAddons.length" class="form-label">Add-ons</label>
-  <div *ngFor="let addon of selectedAddons; let i = index" class="form-check">
-    <input
+  <!-- <input
       (change)="addonChanged($event)"
       class="form-check-input"
       type="checkbox"
@@ -69,8 +68,20 @@
     />
     <label class="form-check-label" for="flexCheckDefault">
       {{ addon }}
-    </label>
-  </div>
+    </label> -->
+  <select
+    *ngIf="selectedAddons.length"
+    class="form-select"
+    name="addon"
+    aria-label="Default select example"
+    ngModel
+    (change)="addonChanged($event)"
+  >
+    <option selected value="">Select</option>
+    <option *ngFor="let addon of selectedAddons; let i = index" [value]="addon">
+      {{ addon }}
+    </option>
+  </select>
 
   <div class="mb-3">
     <label for="exampleFormControlTextarea1" class="form-label"

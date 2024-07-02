@@ -3,7 +3,7 @@ export class Inquiry {
   email: string;
   phone: number;
   service: string;
-  addons: string[];
+  addons: string;
   information: string;
 
   constructor(
@@ -11,7 +11,7 @@ export class Inquiry {
     email: string,
     phone: number,
     service: string,
-    addons: string[],
+    addons: string,
     information: string
   ) {
     this.name = name;

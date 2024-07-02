@@ -23,6 +23,7 @@ export class FormComponent {
       (res) => (this.inquiries = res),
       (err) => console.log(err)
     );
+    console.log('inquiries are: ' + this.inquiries);
   }
   services = [
     {
@@ -57,7 +58,7 @@ export class FormComponent {
     },
   ];
   selectedAddons: any[] = [];
-  checkedAddons: string[] = [];
+  checkedAddons: any;
   selectedService: any = '';
 
   serviceChanged(event: any) {
@@ -68,58 +69,66 @@ export class FormComponent {
     this.selectedService = selectedService?.name;
     this.selectedAddons = selectedService ? selectedService.addons : [];
     console.log('selected service: ' + selectedService?.name);
-
-    console.log('available add-ons: ' + this.selectedAddons);
   }
   addonChanged(event: any) {
-    if (
-      event.target.checked &&
-      !this.checkedAddons.includes(event.target.value)
-    ) {
-      this.checkedAddons.push(event.target.value);
-    } else if (
-      !event.target.checked &&
-      this.checkedAddons.includes(event.target.value)
-    ) {
-      const foundAddon = this.checkedAddons.findIndex(
-        (addon) => addon == event.target.value
-      );
-      this.checkedAddons.splice(foundAddon, 1);
-    }
-    console.log(this.checkedAddons);
+    console.log(event.target.value);
+
+    // IF ADDONS IS A CHECKLIST
+    // if (
+    //   event.target.checked &&
+    //   !this.checkedAddons.includes(event.target.value)
+    // ) {
+    //   this.checkedAddons.push(event.target.value);
+    // } else if (
+    //   !event.target.checked &&
+    //   this.checkedAddons.includes(event.target.value)
+    // ) {
+    //   const foundAddon = this.checkedAddons.findIndex(
+    //     (addon) => addon == event.target.value
+    //   );
+    //   this.checkedAddons.splice(foundAddon, 1);
+    // }
+    // console.log(this.checkedAddons);
   }
   sendEmail(contactForm: any) {
     console.log(contactForm.value);
 
-    const templateParams = {
+    let templateParams = {
       name: contactForm.value.name,
       email: contactForm.value.email,
       phone: contactForm.value.phone,
       service: this.selectedService,
-      addons: this.checkedAddons,
+      addons: contactForm.value.addon,
       information: contactForm.value.information,
     };
 
-    emailjs
-      .send(
-        environment.emailjs.service_ID,
-        environment.emailjs.template_ID,
-        templateParams,
-        {
-          publicKey: environment.emailjs.public_key,
-        }
-      )
-      .then(
-        (response) => {
-          this.formStatus = 'Thank you!';
-          console.log(this.formStatus);
-        },
-        (err) => {
-          console.log('FAILED...', err);
-        }
-      );
-    this._inquiryService.getInquiries();
-    this._inquiryService.postInquiries(templateParams).subscribe(
+    // emailjs
+    //   .send(
+    //     environment.emailjs.service_ID,
+    //     environment.emailjs.template_ID,
+    //     templateParams,
+    //     {
+    //       publicKey: environment.emailjs.public_key,
+    //     }
+    //   )
+    //   .then(
+    //     (response) => {
+    //       this.formStatus = 'Thank you!';
+    //       console.log(this.formStatus);
+    //     },
+    //     (err) => {
+    //       console.log('FAILED...', err);
+    //     }
+    //   );
+    this.inquiries = new Inquiry(
+      contactForm.value.name,
+      contactForm.value.email,
+      contactForm.value.number,
+      this.selectedService,
+      contactForm.value.addon,
+      contactForm.value.information
+    );
+    this._inquiryService.postInquiries(this.inquiries).subscribe(
       (response) => {
         console.log('posted to database!');
       },

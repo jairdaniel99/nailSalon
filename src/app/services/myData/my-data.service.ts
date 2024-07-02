@@ -12,7 +12,10 @@ export class MyDataService {
   getInquiries(): Observable<Inquiry[]> {
     return this.http.get<Inquiry[]>(this._inquiriesURL);
   }
-  postInquiries(inquiriesObj: Inquiry): Observable<Inquiry[]> {
+  postInquiries(inquiriesObj: any): Observable<Inquiry[]> {
     return this.http.post<Inquiry[]>(this._inquiriesURL, inquiriesObj);
+  }
+  test() {
+    console.log('this is a service test and it works.');
   }
 }
