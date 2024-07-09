@@ -1,0 +1,35 @@
+.card-cover {
+  width: auto;
+}
+
+#price-card {
+  margin: auto;
+}
+
+.list-group-item {
+  background-color: #ffe0c3;
+  border: 0;
+  padding: 1rem;
+}
+#hero-background-image {
+  height: 150px;
+}
+
+.card-header {
+  background-color: #ffe0c3;
+  font-weight: bolder;
+}
+
+li > span {
+  font-weight: bolder;
+}
+
+.card-body {
+  background-color: #ffe0c3;
+}
+
+.btn-primary {
+  color: #272727;
+  background-color: antiquewhite;
+  border-color: #aeaeae6e;
+}

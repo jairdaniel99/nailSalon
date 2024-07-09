@@ -1,10 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 #hero-background-image {
   background-image: url("assets/images/image.jpg");
+  height: 400px;
+  margin-left: 30px;
+  margin-right: 30px;
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
+}
+#hero-background-image-2 {
+  background-image: url("assets/images/nail-wallpaper-accesories-2.jpg");
+  height: 400px;
+  margin-left: 30px;
+  margin-right: 30px;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
 }
 
 .animate-left {
@@ -28,13 +40,14 @@
 }
 
 body {
-  background-color: rgba(255, 235, 210, 0.949);
+  background-color: rgba(255, 235, 210, 0.948);
 }
 #navbar {
   background-color: rgba(255, 235, 210, 0.949);
 }
 .contact-background {
   background-image: url("assets/images/nail-care-accessory-tools-pink-background.jpg");
+
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -49,10 +62,18 @@ body {
   font-optical-sizing: auto;
   font: weight 100px;
   font-style: normal;
+  font-size: larger;
 }
 
 .form-control:focus,
 .form-select:focus {
   border-color: white;
   box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.384);
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }

@@ -17,7 +17,6 @@ export class FormComponent {
     private _inquiryService: MyDataService,
     private formBuilder: FormBuilder
   ) {}
-
   ngOnInit() {
     this._inquiryService.getInquiries().subscribe(
       (res) => (this.inquiries = res),
@@ -102,28 +101,28 @@ export class FormComponent {
       information: contactForm.value.information,
     };
 
-    // emailjs
-    //   .send(
-    //     environment.emailjs.service_ID,
-    //     environment.emailjs.template_ID,
-    //     templateParams,
-    //     {
-    //       publicKey: environment.emailjs.public_key,
-    //     }
-    //   )
-    //   .then(
-    //     (response) => {
-    //       this.formStatus = 'Thank you!';
-    //       console.log(this.formStatus);
-    //     },
-    //     (err) => {
-    //       console.log('FAILED...', err);
-    //     }
-    //   );
+    emailjs
+      .send(
+        environment.emailjs.service_ID,
+        environment.emailjs.template_ID,
+        templateParams,
+        {
+          publicKey: environment.emailjs.public_key,
+        }
+      )
+      .then(
+        (response) => {
+          this.formStatus = 'Your form was submitted successfully!';
+          console.log(this.formStatus);
+        },
+        (err) => {
+          console.log('FAILED...', err);
+        }
+      );
     this.inquiries = new Inquiry(
       contactForm.value.name,
       contactForm.value.email,
-      contactForm.value.number,
+      contactForm.value.phone,
       this.selectedService,
       contactForm.value.addon,
       contactForm.value.information
@@ -131,6 +130,7 @@ export class FormComponent {
     this._inquiryService.postInquiries(this.inquiries).subscribe(
       (response) => {
         console.log('posted to database!');
+        contactForm.reset();
       },
       (error) => console.log("can't post to database.")
     );

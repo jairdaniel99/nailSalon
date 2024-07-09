@@ -8,7 +8,7 @@
     and I'll try to answer within a day!
   </h5>
   <div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label">Name</label>
+    <label for="name" class="form-label">Name</label>
     <input
       type="text"
       class="form-control"
@@ -16,7 +16,13 @@
       id="name"
       placeholder="Please fill up your name."
       ngModel
+      #varFirst="ngModel"
+      required
     />
+    <div *ngIf="varFirst.touched && varFirst.invalid">
+      <small style="color: rgb(255, 0, 0)">Please enter your name</small>
+    </div>
+    <div></div>
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label"
         >Email address</label
@@ -28,7 +34,12 @@
         id="exampleFormControlInput1"
         placeholder="name@example.com"
         ngModel
+        #varEmail="ngModel"
+        [required]="!ContactForm.value.phone"
       />
+    </div>
+    <div *ngIf="varEmail.touched && varEmail.invalid">
+      <small style="color: rgb(255, 0, 0)">Please enter your email</small>
     </div>
     <div class="mb-3">
       <label for="phone" class="form-label">Phone</label>
@@ -39,7 +50,12 @@
         id="phone"
         placeholder="Please enter a phone number."
         ngModel
+        #varPhone="ngModel"
+        [required]="!ContactForm.value.email"
       />
+    </div>
+    <div *ngIf="varPhone.touched && varPhone.invalid">
+      <small style="color: rgb(255, 0, 0)">Please enter your phone</small>
     </div>
 
     <label for="form-select" class="form-label"
@@ -75,10 +91,9 @@
     name="addon"
     aria-label="Default select example"
     ngModel
-    (change)="addonChanged($event)"
   >
     <option selected value="">Select</option>
-    <option *ngFor="let addon of selectedAddons; let i = index" [value]="addon">
+    <option *ngFor="let addon of selectedAddons" [value]="addon">
       {{ addon }}
     </option>
   </select>
@@ -98,6 +113,12 @@
       ngModel
     ></textarea>
   </div>
-  <button class="btn btn-outline-light" type="submit">Submit</button>
+  <button
+    class="btn btn-outline-light"
+    type="submit"
+    [disabled]="!ContactForm.form.valid"
+  >
+    Submit
+  </button>
   <div *ngIf="formStatus">{{ formStatus }}</div>
 </form>

@@ -1,0 +1,19 @@
+.card {
+  display: inline-block;
+  width: 300px;
+}
+#service-image {
+  width: 300px;
+}
+
+.gallery-class {
+  width: 700px;
+}
+
+.carousel-inner {
+  position: relative;
+  width: 500px;
+  height: 600px;
+  overflow: hidden;
+  margin: auto;
+}

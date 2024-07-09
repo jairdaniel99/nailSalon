@@ -1,3 +1,16 @@
 img {
-  width: 200px;
+  width: 450px;
 }
+
+#hero-background-image {
+  height: 150px;
+}
+
+#photo-certificate {
+  width: 350px;
+}
+
+/* .mask {
+  max-width: fit-content;
+  width: 350px;
+} */
